@@ -7,7 +7,11 @@ if (process.env.PORT !== "")
 server.listen(process.env.PORT);
 
 var nowjs = require("now");
-var everyone = nowjs.initialize(server);
+var everyone = nowjs.initialize(server, {
+    socketio: {
+        transports:['xhr-polling','jsonp-polling']
+    }
+});
 
 everyone.connected(function(){
     console.log("Joined: " + this.now.name);

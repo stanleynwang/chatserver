@@ -24,3 +24,7 @@ everyone.disconnected(function(){
 everyone.now.distributeMessage = function(message){
     everyone.now.receiveMessage(this.now.name, message);
 };
+
+everyone.now.distributeMessageToRound = function(message){
+    everyone.now.receiveMessageIfSameRound(this.now.name, message, this.now.round);
+};

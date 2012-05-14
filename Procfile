@@ -1,1 +1,1 @@
-web: node helloworld_server.js
+web: node server.js

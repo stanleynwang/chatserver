@@ -1,22 +1,21 @@
-﻿var fs = require('fs');
-var server = require('http').createServer(function(req, response){
-  fs.readFile('helloworld.html', function(err, data){
-    response.writeHead(200, {'Content-Type':'text/html'});  
-    response.write(data);  
-    response.end();
-  });
+﻿var server = require('http').createServer(function(req, res){
+    res.writeHead(200, {'Content-Type':'text/html'});
+    res.end();
 });
 server.listen(8080);
-var everyone = require("../lib/nowServerLib.js").initialize(server);
 
+var nowjs = require("now");
+var everyone = nowjs.initialize(server);
 
 everyone.connected(function(){
-  console.log("Joined: " + this.now.name);
+    console.log("Joined: " + this.now.name);
 });
 
 
 everyone.disconnected(function(){
-  console.log("Left: " + this.now.name);
+    console.log("Left: " + this.now.name);
 });
 
-everyone.now.distributeMessage = function(message){everyone.now.receiveMessage(this.now.name, message);};
+everyone.now.distributeMessage = function(message){
+    everyone.now.receiveMessage(this.now.name, message);
+};
